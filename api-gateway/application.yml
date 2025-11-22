@@ -1,0 +1,127 @@
+server:
+  port: 8100
+  address: 0.0.0.0
+
+# Actuator configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,gateway
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# Spring Boot Admin Client configuration
+spring.boot.admin.client:
+  url: http://admin-server:8090
+  instance:
+    name: ${spring.application.name}
+    service-url: http://gateway-service:8100
+    management-url: http://gateway-service:8100/actuator
+    health-url: http://gateway-service:8100/actuator/health
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+
+      routes:
+        # Authentication Service - API Routes
+        - id: auth-service-api
+          uri: http://auth-service:8082
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=0
+            - AddResponseHeader=X-Service-Name, auth-service
+
+        # Authentication Service - OpenAPI Documentation
+        - id: auth-service-openapi
+          uri: http://auth-service:8082
+          predicates:
+            - Path=/v3/api-docs/auth-service
+          filters:
+            - RewritePath=/v3/api-docs/auth-service, /v3/api-docs
+            - AddResponseHeader=X-Service-Name, auth-service
+
+        # Notes Service - API Routes
+        - id: notes-service-api
+          uri: http://notes-service:8083
+          predicates:
+            - Path=/api/v1/notes/**
+          filters:
+            - StripPrefix=0
+            - AddResponseHeader=X-Service-Name, notes-service
+
+        # Notes Service - OpenAPI Documentation
+        - id: notes-service-openapi
+          uri: http://notes-service:8083
+          predicates:
+            - Path=/v3/api-docs/notes-service
+          filters:
+            - RewritePath=/v3/api-docs/notes-service, /v3/api-docs
+            - AddResponseHeader=X-Service-Name, notes-service
+
+        # Password Service - API Routes
+        - id: password-service-api
+          uri: http://password-service:8084
+          predicates:
+            - Path=/api/v1/passwords/**
+          filters:
+            - StripPrefix=0
+            - AddResponseHeader=X-Service-Name, password-service
+
+        # Password Service - OpenAPI Documentation
+        - id: password-service-openapi
+          uri: http://password-service:8084
+          predicates:
+            - Path=/v3/api-docs/password-service
+          filters:
+            - RewritePath=/v3/api-docs/password-service, /v3/api-docs
+            - AddResponseHeader=X-Service-Name, password-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:${EUREKA_PORT}/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: false
+
+# Configuración de SpringDoc OpenAPI - Documentación centralizada
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - name: Authentication Service
+        url: /v3/api-docs/auth-service
+        display-name: "Authentication Service"
+      - name: Notes Service
+        url: /v3/api-docs/notes-service
+        display-name: "Notes Service"
+      - name: Password Service
+        url: /v3/api-docs/password-service
+        display-name: "Password Service"
+    urls-primary-name: Authentication Service
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  cache:
+    disabled: true

@@ -1,0 +1,42 @@
+server:
+  port: 8761
+  address: 0.0.0.0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# Spring Boot Admin Client configuration
+spring.boot.admin.client:
+  url: http://admin-server:8090
+  instance:
+    name: ${spring.application.name}
+    service-url: http://eureka-server:8761
+    management-url: http://eureka-server:8761/actuator
+    health-url: http://eureka-server:8761/actuator/health
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  instance:
+    hostname: eureka-server
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+    enable-self-preservation: false
+

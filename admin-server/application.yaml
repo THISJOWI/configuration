@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: admin-server
+
+server:
+  port: 8090
+  address: 0.0.0.0
+
+# Configuración de Eureka Client
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: false
+    lease-renewal-interval-in-seconds: 10
+
+# Configuración de Spring Boot Admin
+spring.boot.admin:
+  discovery:
+    enabled: true
+    converter:
+      management-context-path: /actuator
+  ui:
+    title: "Microservices Admin Dashboard"
+
+# Actuator configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
