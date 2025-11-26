@@ -44,9 +44,10 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
   instance:
-    prefer-ip-address: false
     prefer-hostname: true
     hostname: auth-service
+    lease-timeout-in-seconds: 10
+    lease-renewal-interval-in-seconds: 5
 
 # Actuator configuration
 management:
@@ -91,6 +92,8 @@ kafka:
     key-serializer: org.apache.kafka.common.serialization.StringSerializer
     value-serializer: org.apache.kafka.common.serialization.StringSerializer
     com.netflix.eureka: DEBUG
+  admin:
+    auto-create-topics: true
 
 springdoc:
   api-docs:

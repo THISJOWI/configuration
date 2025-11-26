@@ -101,9 +101,10 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
   instance:
-    prefer-ip-address: false
     prefer-hostname: true
     hostname: api-gateway-service
+    lease-timeout-in-seconds: 20
+    lease-renewal-interval-in-seconds: 10
 
 # Configuración de SpringDoc OpenAPI - Documentación centralizada
 springdoc:
