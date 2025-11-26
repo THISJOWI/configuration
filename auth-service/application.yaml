@@ -45,6 +45,8 @@ eureka:
     register-with-eureka: true
   instance:
     prefer-ip-address: false
+    prefer-hostname: true
+    hostname: auth-service
 
 # Actuator configuration
 management:

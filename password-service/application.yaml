@@ -33,7 +33,9 @@ eureka:
     serviceUrl:
       defaultZone: http://eureka-server:8761/eureka/
   instance:
-    prefer-ip-address: true
+    prefer-ip-address: false
+    prefer-hostname: true
+    hostname: password-service
 
 management:
   endpoints:
