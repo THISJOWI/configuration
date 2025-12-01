@@ -2,10 +2,6 @@ spring:
   application:
     name: otp-service
 
-  server:
-    port: 8085
-    address: 0.0.0.0
-
   datasource:
     url: jdbc:postgresql://cockroachdb:${DB_PORT}/otp?sslmode=disable
     username: ${DB_USERNAME}
@@ -25,6 +21,25 @@ spring:
   cloud:
     compatibility-verifier:
       enabled: false
+
+  # Spring Boot Admin Client configuration
+  boot:
+    admin:
+      client:
+        url: http://admin-server:8090
+        instance:
+          name: ${spring.application.name}
+          service-url: http://otp-service:8085
+          management-url: http://otp-service:8085/actuator
+          health-url: http://otp-service:8085/actuator/health
+
+  docker:
+    compose:
+      enabled: false
+
+server:
+  port: 8085
+  address: 0.0.0.0
 
 eureka:
   client:
@@ -51,18 +66,10 @@ management:
       prometheus:
         enabled: true
 
-# Spring Boot Admin Client configuration
-spring.boot.admin.client:
-  url: http://admin-server:8090
-  instance:
-    name: ${spring.application.name}
-    service-url: http://otp-service:8085
-    management-url: http://otp-service:8085/actuator
-    health-url: http://otp-service:8085/actuator/health
-
 logging:
   level:
     uk.thisjowi.OTP: DEBUG
+
 kafka:
   bootstrap-servers: ${KAFKA_HOST}:${KAFKA_PORT}
   topic:
@@ -76,10 +83,6 @@ kafka:
   producer:
     key-serializer: org.apache.kafka.common.serialization.StringSerializer
     value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
-  docker:
-    compose:
-      enabled: false
 
 # OpenAPI Documentation configuration
 springdoc:
