@@ -94,6 +94,24 @@ spring:
             - RewritePath=/v3/api-docs/password-service, /v3/api-docs
             - AddResponseHeader=X-Service-Name, password-service
 
+         # OTP Service - API Routes
+        - id: otp-service-api
+          uri: http://otp-service:8085
+          predicates:
+            - Path=/api/v1/otp/**
+          filters:
+            - StripPrefix=0
+            - AddResponseHeader=X-Service-Name, otp-service
+
+        # OTP Service - OpenAPI Documentation
+        - id: otp-service-openapi
+          uri: http://otp-service:8085
+          predicates:
+            - Path=/v3/api-docs/otp-service
+          filters:
+            - RewritePath=/v3/api-docs/otp-service, /v3/api-docs
+            - AddResponseHeader=X-Service-Name, otp-service
+
 eureka:
   client:
     serviceUrl:
@@ -122,7 +140,11 @@ springdoc:
       - name: Password Service
         url: /v3/api-docs/password-service
         display-name: "Password Service"
+      - name: OTP Service
+        url: /v3/api-docs/otp-service
+        display-name: "OTP Service"
     urls-primary-name: Authentication Service
+
   api-docs:
     enabled: true
     path: /v3/api-docs
