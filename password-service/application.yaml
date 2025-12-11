@@ -2,9 +2,9 @@ spring:
   application:
     name: password-service
 
-  server:
-    port: 8084
-    address: 0.0.0.0
+server:
+  port: 8084
+  address: 0.0.0.0
 
   datasource:
     url: jdbc:postgresql://cockroachdb:${DB_PORT}/password
