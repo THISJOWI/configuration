@@ -70,7 +70,7 @@ kafka:
 
 auth:
   service:
-    url: http://gateway-service:8100/api/auth
+    url: http://gateway-service:8100/api/v1/auth
 
 # JWT secret used to verify tokens locally if Authentication service is unavailable.
 # Ideally both services should load the same secret from Vault or an environment
