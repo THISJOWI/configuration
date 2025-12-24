@@ -53,10 +53,10 @@ spring:
         - id: auth-service-openapi
           uri: http://auth:8082
           predicates:
-            - Path=/v3/api-docs/auth-service
+            - Path=/v3/api-docs/auth
           filters:
-            - RewritePath=/v3/api-docs/auth-service, /v3/api-docs
-            - AddResponseHeader=X-Service-Name, auth-service
+            - RewritePath=/v3/api-docs/auth, /v3/api-docs
+            - AddResponseHeader=X-Service-Name, auth
 
         # Notes Service - API Routes
         - id: notes-service-api
@@ -132,16 +132,16 @@ springdoc:
     config-url: /v3/api-docs/swagger-config
     urls:
       - name: Authentication Service
-        url: /v3/api-docs/auth-service
+        url: /v3/api-docs/auth
         display-name: "Authentication Service"
       - name: Notes Service
-        url: /v3/api-docs/notes-service
+        url: /v3/api-docs/notes
         display-name: "Notes Service"
       - name: Password Service
-        url: /v3/api-docs/password-service
+        url: /v3/api-docs/password
         display-name: "Password Service"
       - name: OTP Service
-        url: /v3/api-docs/otp-service
+        url: /v3/api-docs/otp
         display-name: "OTP Service"
     urls-primary-name: Authentication Service
 
