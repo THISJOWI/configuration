@@ -47,7 +47,7 @@ spring:
             - Path=/api/v1/auth/**
           filters:
             - StripPrefix=0
-            - AddResponseHeader=X-Service-Name, auth-service
+            - AddResponseHeader=X-Service-Name, auth
 
         # Authentication Service - OpenAPI Documentation
         - id: auth-service-openapi
