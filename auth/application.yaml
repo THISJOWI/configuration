@@ -46,7 +46,7 @@ eureka:
     register-with-eureka: true
   instance:
     prefer-hostname: true
-    hostname: auth-service
+    hostname: auth
     lease-timeout-in-seconds: 10
     lease-renewal-interval-in-seconds: 5
 
@@ -69,9 +69,9 @@ spring.boot.admin.client:
   url: http://admin:8090
   instance:
     name: ${spring.application.name}
-    service-url: http://auth-service:8082
-    management-url: http://auth-service:8082/actuator
-    health-url: http://auth-service:8082/actuator/health
+    service-url: http://auth:8082
+    management-url: http://auth:8082/actuator
+    health-url: http://auth:8082/actuator/health
 
 vault:
   url: "http://${VAULT_HOST}:${VAULT_PORT}"
