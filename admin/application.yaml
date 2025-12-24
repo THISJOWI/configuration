@@ -1,6 +1,6 @@
 spring:
   application:
-    name: admin-server
+    name: admin
 
 server:
   port: 8090
@@ -10,11 +10,11 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://eureka-server:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
     register-with-eureka: true
   instance:
     prefer-hostname: true
-    hostname: admin-server
+    hostname: admin
     lease-timeout-in-seconds: 20
     lease-renewal-interval-in-seconds: 10
 

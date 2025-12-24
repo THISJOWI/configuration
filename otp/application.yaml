@@ -1,6 +1,6 @@
 spring:
   application:
-    name: otp-service
+    name: otp
 
   datasource:
     url: jdbc:postgresql://cockroachdb:${DB_PORT}/otp?sslmode=disable
@@ -26,12 +26,12 @@ spring:
   boot:
     admin:
       client:
-        url: http://admin-server:8090
+        url: http://admin:8090
         instance:
           name: ${spring.application.name}
-          service-url: http://otp-service:8085
-          management-url: http://otp-service:8085/actuator
-          health-url: http://otp-service:8085/actuator/health
+          service-url: http://otp:8085
+          management-url: http://otp:8085/actuator
+          health-url: http://otp:8085/actuator/health
 
   docker:
     compose:
@@ -46,10 +46,10 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://eureka-server:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
   instance:
     prefer-hostname: true
-    hostname: otp-service
+    hostname: otp
     lease-timeout-in-seconds: 10
     lease-renewal-interval-in-seconds: 5
 
@@ -97,3 +97,7 @@ springdoc:
     description: API for managing user passwords
     version: 1.0.0
   packages-to-scan: uk.thisjowi.OTP
+
+app:
+  encryption:
+    key: ${JWT_SECRET}

@@ -18,12 +18,12 @@ management:
 
 # Spring Boot Admin Client configuration
 spring.boot.admin.client:
-  url: http://admin-server:8090
+  url: http://admin:8090
   instance:
     name: ${spring.application.name}
-    service-url: http://gateway-service:8100
-    management-url: http://gateway-service:8100/actuator
-    health-url: http://gateway-service:8100/actuator/health
+    service-url: http://api-gateway:8100
+    management-url: http://api-gateway:8100/actuator
+    health-url: http://api-gateway:8100/actuator/health
 
 spring:
   application:
@@ -42,7 +42,7 @@ spring:
       routes:
         # Authentication Service - API Routes
         - id: auth-service-api
-          uri: http://auth-service:8082
+          uri: http://auth:8082
           predicates:
             - Path=/api/v1/auth/**
           filters:
@@ -51,7 +51,7 @@ spring:
 
         # Authentication Service - OpenAPI Documentation
         - id: auth-service-openapi
-          uri: http://auth-service:8082
+          uri: http://auth:8082
           predicates:
             - Path=/v3/api-docs/auth-service
           filters:
@@ -60,7 +60,7 @@ spring:
 
         # Notes Service - API Routes
         - id: notes-service-api
-          uri: http://notes-service:8083
+          uri: http://notes:8083
           predicates:
             - Path=/api/v1/notes/**
           filters:
@@ -69,7 +69,7 @@ spring:
 
         # Notes Service - OpenAPI Documentation
         - id: notes-service-openapi
-          uri: http://notes-service:8083
+          uri: http://notes:8083
           predicates:
             - Path=/v3/api-docs/notes-service
           filters:
@@ -78,7 +78,7 @@ spring:
 
         # Password Service - API Routes
         - id: password-service-api
-          uri: http://password-service:8084
+          uri: http://password:8084
           predicates:
             - Path=/api/v1/passwords/**
           filters:
@@ -87,7 +87,7 @@ spring:
 
         # Password Service - OpenAPI Documentation
         - id: password-service-openapi
-          uri: http://password-service:8084
+          uri: http://password:8084
           predicates:
             - Path=/v3/api-docs/password-service
           filters:
@@ -96,7 +96,7 @@ spring:
 
          # OTP Service - API Routes
         - id: otp-service-api
-          uri: http://otp-service:8085
+          uri: http://otp:8085
           predicates:
             - Path=/api/v1/otp/**
           filters:
@@ -105,7 +105,7 @@ spring:
 
         # OTP Service - OpenAPI Documentation
         - id: otp-service-openapi
-          uri: http://otp-service:8085
+          uri: http://otp:8085
           predicates:
             - Path=/v3/api-docs/otp-service
           filters:
@@ -115,12 +115,12 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://eureka-server:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
     fetch-registry: true
     register-with-eureka: true
   instance:
     prefer-hostname: true
-    hostname: api-gateway-service
+    hostname: api-gateway
     lease-timeout-in-seconds: 20
     lease-renewal-interval-in-seconds: 10
 

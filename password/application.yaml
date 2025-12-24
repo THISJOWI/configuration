@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: password-service
+    name: password
 
   datasource:
     url: jdbc:postgresql://cockroachdb:${DB_PORT}/password
@@ -31,10 +31,10 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://eureka-server:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
   instance:
     prefer-hostname: true
-    hostname: password-service
+    hostname: password
     lease-timeout-in-seconds: 10
     lease-renewal-interval-in-seconds: 5
 
@@ -53,12 +53,12 @@ management:
 
 # Spring Boot Admin Client configuration
 spring.boot.admin.client:
-  url: http://admin-server:8090
+  url: http://admin:8090
   instance:
     name: ${spring.application.name}
-    service-url: http://password-service:8084
-    management-url: http://password-service:8084/actuator
-    health-url: http://password-service:8084/actuator/health
+    service-url: http://password:8084
+    management-url: http://password:8084/actuator
+    health-url: http://password:8084/actuator/health
 
 logging:
   level:
@@ -70,7 +70,7 @@ kafka:
 
 auth:
   service:
-    url: http://gateway-service:8100/api/v1/auth
+    url: http://api-gateway:8100/api/v1/auth
 
 # JWT secret used to verify tokens locally if Authentication service is unavailable.
 # Ideally both services should load the same secret from Vault or an environment

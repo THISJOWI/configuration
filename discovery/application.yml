@@ -17,25 +17,25 @@ management:
 
 # Spring Boot Admin Client configuration
 spring.boot.admin.client:
-  url: http://admin-server:8090
+  url: http://admin:8090
   instance:
     name: ${spring.application.name}
-    service-url: http://eureka-server:8761
-    management-url: http://eureka-server:8761/actuator
-    health-url: http://eureka-server:8761/actuator/health
+    service-url: http://discovery:8761
+    management-url: http://discovery:8761/actuator
+    health-url: http://discovery:8761/actuator/health
 
 spring:
   application:
-    name: eureka-server
+    name: discovery
 
 eureka:
   instance:
-    hostname: eureka-server
+    hostname: discovery
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://eureka-server:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
   server:
     wait-time-in-ms-when-sync-empty: 0
     enable-self-preservation: false
