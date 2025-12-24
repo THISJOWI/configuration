@@ -41,8 +41,8 @@ spring:
 
       routes:
         # Authentication Service - API Routes
-        - id: auth-api
-          uri: lb://auth
+        - id: auth
+          uri: http://auth:8082
           predicates:
             - Path=/api/v1/auth/**
           filters:
