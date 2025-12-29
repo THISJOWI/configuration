@@ -41,7 +41,7 @@ spring:
 
       routes:
         # Authentication Service - API Routes
-        - id: auth-service-api
+        - id: auth-api
           uri: http://auth:8082
           predicates:
             - Path=/api/auth/**
@@ -50,7 +50,7 @@ spring:
             - AddResponseHeader=X-Service-Name, auth
 
         # Authentication Service - OpenAPI Documentation
-        - id: auth-service-openapi
+        - id: auth-openapi
           uri: http://auth:8082
           predicates:
             - Path=/v3/api-docs/auth
