@@ -45,17 +45,17 @@ spring:
         - id: auth-service-openapi
           uri: http://auth:8082
           predicates:
-            - Path=/v3/api-docs/auth
+            - Path=/v3/api-docs
           filters:
             # Corregido: Reescribir la ruta completa para que al microservicio le llegue solo /v3/api-docs
-            - RewritePath=/v3/api-docs/auth(?<segment>.*), /v3/api-docs$\{segment}
+            - RewritePath=/v3/api-docs/(?<segment>.*), /v3/api-docs$\{segment}
             - AddResponseHeader=X-Service-Name, auth
 
         # Authentication Service - API Routes
         - id: auth
           uri: http://auth:8082
           predicates:
-            - Path=/api/v1/auth/**
+            - Path=/auth/**
           filters:
             - StripPrefix=0
             - AddResponseHeader=X-Service-Name, auth
