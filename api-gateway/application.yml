@@ -138,14 +138,14 @@ springdoc:
         display-name: "Authentication"
       - name: Notes Service
         url: /v3/api-docs/notes
-        display-name: "Notes Service"
+        display-name: "Notes"
       - name: Password Service
         url: /v3/api-docs/password
-        display-name: "Password Service"
+        display-name: "Password"
       - name: OTP Service
         url: /v3/api-docs/otp
-        display-name: "OTP Service"
-    urls-primary-name: Authentication Service
+        display-name: "OTP"
+    urls-primary-name: auth
 
   api-docs:
     enabled: true
