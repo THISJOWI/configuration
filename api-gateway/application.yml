@@ -42,7 +42,7 @@ spring:
       routes:
         # Authentication Service - API Routes
         - id: auth-api
-          uri: http://auth:8082
+          uri: lb://auth
           predicates:
             - Path=/api/v1/auth/**
           filters:
@@ -51,7 +51,7 @@ spring:
 
         # Authentication Service - OpenAPI Documentation
         - id: auth-openapi
-          uri: http://auth:8082
+          uri: lb://auth
           predicates:
             - Path=/v3/api-docs/auth
           filters:
@@ -60,7 +60,7 @@ spring:
 
         # Notes Service - API Routes
         - id: notes-service-api
-          uri: http://notes-service:8083
+          uri: lb://notes-service
           predicates:
             - Path=/api/v1/notes/**
           filters:
@@ -69,7 +69,7 @@ spring:
 
         # Notes Service - OpenAPI Documentation
         - id: notes-service-openapi
-          uri: http://notes-service:8083
+          uri: lb://notes-service
           predicates:
             - Path=/v3/api-docs/notes-service
           filters:
@@ -78,7 +78,7 @@ spring:
 
         # Password Service - API Routes
         - id: password-service-api
-          uri: http://password-service:8084
+          uri: lb://password-service
           predicates:
             - Path=/api/v1/passwords/**
           filters:
@@ -87,7 +87,7 @@ spring:
 
         # Password Service - OpenAPI Documentation
         - id: password-service-openapi
-          uri: http://password-service:8084
+          uri: lb://password-service
           predicates:
             - Path=/v3/api-docs/password-service
           filters:
