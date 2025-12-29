@@ -97,7 +97,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://eureka-server:${EUREKA_PORT}/eureka/
+      defaultZone: http://discovery:30876/eureka/
     fetch-registry: true
     register-with-eureka: true
   instance:
