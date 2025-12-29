@@ -133,9 +133,9 @@ springdoc:
     path: /swagger-ui.html
     config-url: /v3/api-docs/swagger-config
     urls:
-      - name: AUTH
+      - name: auth
         url: /v3/api-docs/auth
-        display-name: "Authentication Service"
+        display-name: "Authentication"
       - name: Notes Service
         url: /v3/api-docs/notes
         display-name: "Notes Service"

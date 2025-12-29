@@ -103,7 +103,7 @@ springdoc:
   swagger-ui:
     enabled: true
     path: /swagger-ui.html
-  packages-to-scan: com.thisjowi
+  packages-to-scan: com.thisjowi.auth
 
 jwt:
   secret: "${JWT_SECRET}"
