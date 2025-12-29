@@ -62,40 +62,40 @@ spring:
             - AddResponseHeader=X-Service-Name, auth
 
         # Notes Service - API Routes
-        - id: notes-service-api
+        - id: notes-api
           uri: lb://NOTES
           predicates:
             - Path=/api/v1/notes/**
           filters:
             - StripPrefix=0
-            - AddResponseHeader=X-Service-Name, notes-service
+            - AddResponseHeader=X-Service-Name, notes
 
         # Notes Service - OpenAPI Documentation
-        - id: notes-service-openapi
+        - id: notes-openapi
           uri: lb://NOTES
           predicates:
-            - Path=/v3/api-docs/notes-service
+            - Path=/v3/api-docs/notes
           filters:
-            - RewritePath=/v3/api-docs/notes-service, /v3/api-docs
-            - AddResponseHeader=X-Service-Name, notes-service
+            - RewritePath=/v3/api-docs/notes, /v3/api-docs
+            - AddResponseHeader=X-Service-Name, notes
 
         # Password Service - API Routes
-        - id: password-service-api
+        - id: password-api
           uri: lb://PASSWORD
           predicates:
             - Path=/api/v1/passwords/**
           filters:
             - StripPrefix=0
-            - AddResponseHeader=X-Service-Name, password-service
+            - AddResponseHeader=X-Service-Name, password
 
         # Password Service - OpenAPI Documentation
-        - id: password-service-openapi
-          uri: lb://PASSWORD-SERVICE
+        - id: password-openapi
+          uri: lb://PASSWORD
           predicates:
-            - Path=/v3/api-docs/password-service
+            - Path=/v3/api-docs/password
           filters:
-            - RewritePath=/v3/api-docs/password-service, /v3/api-docs
-            - AddResponseHeader=X-Service-Name, password-service
+            - RewritePath=/v3/api-docs/password, /v3/api-docs
+            - AddResponseHeader=X-Service-Name, password
 
 eureka:
   client:
@@ -118,10 +118,10 @@ springdoc:
         url: /v3/api-docs/auth
         display-name: "Authentication"
       - name: Notes Service
-        url: /v3/api-docs/notes-service
-        display-name: "Note"
+        url: /v3/api-docs/notes
+        display-name: "Notes"
       - name: Password Service
-        url: /v3/api-docs/password-service
+        url: /v3/api-docs/password
         display-name: "Password"
     urls-primary-name: Authentication Service
   api-docs:
