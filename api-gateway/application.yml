@@ -63,7 +63,7 @@ spring:
 
         # Notes Service - API Routes
         - id: notes-service-api
-          uri: lb://NOTES-SERVICE
+          uri: lb://NOTES
           predicates:
             - Path=/api/v1/notes/**
           filters:
@@ -72,7 +72,7 @@ spring:
 
         # Notes Service - OpenAPI Documentation
         - id: notes-service-openapi
-          uri: lb://NOTES-SERVICE
+          uri: lb://NOTES
           predicates:
             - Path=/v3/api-docs/notes-service
           filters:
@@ -81,7 +81,7 @@ spring:
 
         # Password Service - API Routes
         - id: password-service-api
-          uri: lb://PASSWORD-SERVICE
+          uri: lb://PASSWORD
           predicates:
             - Path=/api/v1/passwords/**
           filters:
@@ -119,10 +119,10 @@ springdoc:
         display-name: "Authentication"
       - name: Notes Service
         url: /v3/api-docs/notes-service
-        display-name: "Notes Service"
+        display-name: "Note"
       - name: Password Service
         url: /v3/api-docs/password-service
-        display-name: "Password Service"
+        display-name: "Password"
     urls-primary-name: Authentication Service
   api-docs:
     enabled: true

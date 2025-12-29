@@ -1,6 +1,6 @@
 spring:
   application:
-    name: notes-service
+    name: notes
 
   datasource:
     # Example Postgres datasource (adjust host, port, db, user, password)
