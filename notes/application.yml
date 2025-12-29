@@ -34,8 +34,8 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
   instance:
-    prefer-hostname: true
-    hostname: notes-service
+    prefer-ip-address: true
+    hostname: notes
     lease-timeout-in-seconds: 10
     lease-renewal-interval-in-seconds: 5
 
