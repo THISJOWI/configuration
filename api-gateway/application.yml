@@ -18,12 +18,12 @@ management:
 
 # Spring Boot Admin Client configuration
 spring.boot.admin.client:
-  url: http://admin:8090
+  url: http://admin-server:8090
   instance:
     name: ${spring.application.name}
-    service-url: http://api-gateway:8100
-    management-url: http://api-gateway:8100/actuator
-    health-url: http://api-gateway:8100/actuator/health
+    service-url: http://gateway-service:8100
+    management-url: http://gateway-service:8100/actuator
+    health-url: http://gateway-service:8100/actuator/health
 
 spring:
   application:
@@ -40,29 +40,27 @@ spring:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
 
       routes:
-        # MOVIDO ARRIBA: Authentication Service - OpenAPI Documentation
-        # Debe ir antes de la ruta genérica para que no sea "eclipsada"
-        - id: auth-service-openapi
-          uri: http://auth:8082
-          predicates:
-            - Path=/v3/api-docs
-          filters:
-            # Corregido: Reescribir la ruta completa para que al microservicio le llegue solo /v3/api-docs
-            - RewritePath=/v3/api-docs/(?<segment>.*), /v3/api-docs$\{segment}
-            - AddResponseHeader=X-Service-Name, auth
-
         # Authentication Service - API Routes
-        - id: auth
+        - id: auth-service-api
           uri: http://auth:8082
           predicates:
-            - Path=/auth/**
+            - Path=/api/auth/**
           filters:
             - StripPrefix=0
             - AddResponseHeader=X-Service-Name, auth
 
+        # Authentication Service - OpenAPI Documentation
+        - id: auth-service-openapi
+          uri: http://auth:8082
+          predicates:
+            - Path=/v3/api-docs/auth
+          filters:
+            - RewritePath=/v3/api-docs/auth, /v3/api-docs
+            - AddResponseHeader=X-Service-Name, auth
+
         # Notes Service - API Routes
         - id: notes-service-api
-          uri: http://notes:8083
+          uri: http://notes-service:8083
           predicates:
             - Path=/api/v1/notes/**
           filters:
@@ -71,7 +69,7 @@ spring:
 
         # Notes Service - OpenAPI Documentation
         - id: notes-service-openapi
-          uri: http://notes:8083
+          uri: http://notes-service:8083
           predicates:
             - Path=/v3/api-docs/notes-service
           filters:
@@ -80,7 +78,7 @@ spring:
 
         # Password Service - API Routes
         - id: password-service-api
-          uri: http://password:8084
+          uri: http://password-service:8084
           predicates:
             - Path=/api/v1/passwords/**
           filters:
@@ -89,42 +87,21 @@ spring:
 
         # Password Service - OpenAPI Documentation
         - id: password-service-openapi
-          uri: http://password:8084
+          uri: http://password-service:8084
           predicates:
             - Path=/v3/api-docs/password-service
           filters:
             - RewritePath=/v3/api-docs/password-service, /v3/api-docs
             - AddResponseHeader=X-Service-Name, password-service
 
-         # OTP Service - API Routes
-        - id: otp-service-api
-          uri: http://otp:8085
-          predicates:
-            - Path=/api/v1/otp/**
-          filters:
-            - StripPrefix=0
-            - AddResponseHeader=X-Service-Name, otp-service
-
-        # OTP Service - OpenAPI Documentation
-        - id: otp-service-openapi
-          uri: http://otp:8085
-          predicates:
-            - Path=/v3/api-docs/otp-service
-          filters:
-            - RewritePath=/v3/api-docs/otp-service, /v3/api-docs
-            - AddResponseHeader=X-Service-Name, otp-service
-
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://discovery:8761/eureka/
+      defaultZone: http://eureka-server:${EUREKA_PORT}/eureka/
     fetch-registry: true
     register-with-eureka: true
   instance:
-    prefer-hostname: true
-    hostname: api-gateway
-    lease-timeout-in-seconds: 20
-    lease-renewal-interval-in-seconds: 10
+    prefer-ip-address: false
 
 # Configuración de SpringDoc OpenAPI - Documentación centralizada
 springdoc:
@@ -133,20 +110,16 @@ springdoc:
     path: /swagger-ui.html
     config-url: /v3/api-docs/swagger-config
     urls:
-      - name: auth
+      - name: Authentication Service
         url: /v3/api-docs/auth
         display-name: "Authentication"
       - name: Notes Service
-        url: /v3/api-docs/notes
-        display-name: "Notes"
+        url: /v3/api-docs/notes-service
+        display-name: "Notes Service"
       - name: Password Service
-        url: /v3/api-docs/password
-        display-name: "Password"
-      - name: OTP Service
-        url: /v3/api-docs/otp
-        display-name: "OTP"
-    urls-primary-name: auth
-
+        url: /v3/api-docs/password-service
+        display-name: "Password Service"
+    urls-primary-name: Authentication Service
   api-docs:
     enabled: true
     path: /v3/api-docs
