@@ -45,7 +45,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
   instance:
-    prefer-hostname: true
+    prefer-ip-address: true
     hostname: auth
     lease-timeout-in-seconds: 10
     lease-renewal-interval-in-seconds: 5

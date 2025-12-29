@@ -101,7 +101,8 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
   instance:
-    prefer-ip-address: false
+    prefer-ip-address: true
+    hostname: api-gateway
 
 # Configuración de SpringDoc OpenAPI - Documentación centralizada
 springdoc:
