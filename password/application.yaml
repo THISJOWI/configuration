@@ -62,7 +62,7 @@ spring.boot.admin.client:
 
 logging:
   level:
-    uk.thisjowi.Password: DEBUG
+    com.thisjowi.password: DEBUG
 
 kafka:
   topic:
@@ -106,4 +106,4 @@ springdoc:
     title: Password Service API
     description: API for managing user passwords
     version: 1.0.0
-  packages-to-scan: uk.thisjowi.Password
+  packages-to-scan: com.thisjowi.password

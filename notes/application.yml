@@ -27,17 +27,6 @@ server:
   port: 8083
   address: 0.0.0.0
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://discovery:8761/eureka/
-    fetch-registry: true
-    register-with-eureka: true
-  instance:
-    prefer-ip-address: true
-    hostname: notes
-    lease-timeout-in-seconds: 10
-    lease-renewal-interval-in-seconds: 5
 
 management:
   endpoints:
@@ -52,19 +41,6 @@ management:
       prometheus:
         enabled: true
 
-# Spring Boot Admin Client configuration
-spring.boot.admin.client:
-  url: http://admin:8090
-  instance:
-    name: ${spring.application.name}
-    service-url: http://notes-service:8083
-    management-url: http://notes-service:8083/actuator
-    health-url: http://notes-service:8083/actuator/health
-
-logging:
-  level:
-    uk.thisjowi.Notes.service.AuthenticationClient: DEBUG
-
 # Kafka configuration
 kafka:
   bootstrap-servers: ${KAFKA_HOST}:${KAFKA_PORT}
@@ -74,7 +50,7 @@ kafka:
 
 auth:
   service:
-    url: http://api-gateway:8100/api/v1/auth
+    url: http://192.168.1.5/api/v1/auth
 
 jwt:
   secret: "${JWT_SECRET}"

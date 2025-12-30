@@ -38,18 +38,6 @@ spring:
         min-idle: 0
         max-wait: -1ms
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://discovery:8761/eureka/
-    fetch-registry: true
-    register-with-eureka: true
-  instance:
-    prefer-ip-address: true
-    hostname: auth
-    lease-timeout-in-seconds: 10
-    lease-renewal-interval-in-seconds: 5
-
 # Actuator configuration
 management:
   endpoints:
@@ -64,14 +52,6 @@ management:
       prometheus:
         enabled: true
 
-# Spring Boot Admin Client configuration
-spring.boot.admin.client:
-  url: http://admin:8090
-  instance:
-    name: ${spring.application.name}
-    service-url: http://auth:8082
-    management-url: http://auth:8082/actuator
-    health-url: http://auth:8082/actuator/health
 
 vault:
   url: "http://${VAULT_HOST}:${VAULT_PORT}"
