@@ -5,6 +5,8 @@ server:
 spring:
   application:
     name: password
+  flyway:
+    baseline-on-migrate: true
 
   datasource:
     url: jdbc:postgresql://cockroachdb:${DB_PORT}/password
@@ -106,4 +108,8 @@ springdoc:
     title: Password Service API
     description: API for managing user passwords
     version: 1.0.0
+<<<<<<< HEAD
   packages-to-scan: com.thisjowi.password
+=======
+  packages-to-scan: uk.thisjowi.Password
+>>>>>>> ee9b1c25ad9f9e576f8c51375f770c27b0cf8363
