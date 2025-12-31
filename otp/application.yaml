@@ -22,17 +22,6 @@ spring:
     compatibility-verifier:
       enabled: false
 
-  # Spring Boot Admin Client configuration
-  boot:
-    admin:
-      client:
-        url: http://admin:8090
-        instance:
-          name: ${spring.application.name}
-          service-url: http://otp:8085
-          management-url: http://otp:8085/actuator
-          health-url: http://otp:8085/actuator/health
-
   docker:
     compose:
       enabled: false
@@ -40,18 +29,6 @@ spring:
 server:
   port: 8085
   address: 0.0.0.0
-
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    serviceUrl:
-      defaultZone: http://discovery:8761/eureka/
-  instance:
-    prefer-hostname: true
-    hostname: otp
-    lease-timeout-in-seconds: 10
-    lease-renewal-interval-in-seconds: 5
 
 management:
   endpoints:
