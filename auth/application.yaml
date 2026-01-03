@@ -92,6 +92,8 @@ jwt:
 mailtrap:
   api:
     token: ${MAILTRAP_API_TOKEN}
+    url: ${https://send.api.mailtrap.io/api/send}
   sender:
     email: ${MAILTRAP_SENDER_EMAIL}
     name: ${MAILTRAP_SENDER_NAME}
+
