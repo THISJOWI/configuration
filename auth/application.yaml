@@ -88,3 +88,10 @@ springdoc:
 jwt:
   secret: "${JWT_SECRET}"
   expiration: 86400000  # 24 hours in milliseconds
+
+mailtrap:
+  api:
+    token: ${MAILTRAP_API_TOKEN}
+  sender:
+    email: ${MAILTRAP_SENDER_EMAIL}
+    name: ${MAILTRAP_SENDER_NAME}
