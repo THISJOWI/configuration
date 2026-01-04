@@ -3,6 +3,17 @@ server:
   address: 0.0.0.0
 
 spring:
+  cloud:
+    vault:
+      host: ${VAULT_HOST}
+      port: ${VAULT_PORT}
+      scheme: ${VAULT_SCHEME}
+      authentication: ${VAULT_AUTHENTICATION}
+      token: ${VAULT_TOKEN}
+      kv:
+        enabled: true
+    compatibility-verifier:
+      enabled: false
   application:
     name: password
   flyway:
@@ -22,11 +33,6 @@ spring:
       hibernate:
         format_sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-  # Temporarily disable Spring Cloud / Spring Boot compatibility verifier so the app can start
-  cloud:
-    compatibility-verifier:
-      enabled: false
 
 eureka:
   client:
