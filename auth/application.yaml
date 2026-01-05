@@ -3,15 +3,6 @@ server:
   address: 0.0.0.0
 
 spring:
-  cloud:
-    vault:
-      host: ${VAULT_HOST}
-      port: ${VAULT_PORT}
-      scheme: ${VAULT_SCHEME}
-      authentication: ${VAULT_AUTHENTICATION}
-      token: ${VAULT_TOKEN}
-      kv:
-        enabled: true
   application:
     name: auth
   datasource:
