@@ -37,6 +37,17 @@ spring:
         max-idle: 8
         min-idle: 0
         max-wait: -1ms
+  mail:
+    host: ${MAIL_HOST:in-v3.mailjet.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   security:
     oauth2:
       client:
@@ -98,10 +109,7 @@ jwt:
   secret: "${JWT_SECRET}"
   expiration: 86400000  # 24 hours in milliseconds
 
-mailtrap:
-  api:
-    token: ${MAILTRAP_API_TOKEN}
-    url: ${MAILTRAP_API_URL}
+mail:
   sender:
-    email: ${MAILTRAP_SENDER_EMAIL}
-    name: ${MAILTRAP_SENDER_NAME}
+    email: ${MAIL_SENDER_EMAIL}
+    name: ${MAIL_SENDER_NAME}
